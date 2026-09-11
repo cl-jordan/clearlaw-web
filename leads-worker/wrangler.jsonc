@@ -1,0 +1,18 @@
+{
+  "name": "clearlaw-leads",
+  "main": "index.js",
+  "compatibility_date": "2026-08-06",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "clearlaw-leads",
+      "database_id": "a32ad1e2-8734-436e-bbb5-1a964c6d5e44"
+    }
+  ],
+  "send_email": [
+    {
+      "name": "NOTIFY",
+      "destination_address": "hello@clearlaw.ai"
+    }
+  ]
+}

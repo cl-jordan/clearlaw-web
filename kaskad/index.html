@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaskad — obligation intelligence for complex portfolios · by Clearlaw</title>
+<meta name="description" content="Kaskad, by Clearlaw — every deadline, renewal window, and notice requirement across your whole contract set, cross-referenced and resolved to the calendar. Findings from a live engagement on an operating renewable-energy project.">
+<link rel="canonical" href="https://clearlaw.ai/kaskad/">
+<link rel="icon" href="../assets/kaskad-mark.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Clearlaw">
+<meta property="og:title" content="Kaskad — obligation intelligence for complex portfolios">
+<meta property="og:description" content="Every deadline, renewal window, and notice requirement across the whole contract set — cross-referenced and resolved to the calendar. Findings from a live engagement.">
+<meta property="og:url" content="https://clearlaw.ai/kaskad/">
+<meta property="og:image" content="https://clearlaw.ai/assets/og/kaskad.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* DRAFT — brief-v4 spine (proof-led findings from the live engagement, anonymized)
+     poured into the kaskad-landing-v2 brand system (teal on off-white, Inter + JetBrains Mono).
+     Naming (Kaskad vs Clearlaw Obligations Tracker) still open — wordmark isolated in header/footer
+     so a rename is a small diff. */
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-2: #f3f3ef;
+    --line: #e3e2dc;
+    --line-2: #c9c7be;
+    --ink: #0f1822;
+    --ink-2: #2c3744;
+    --ink-3: #5a6573;
+    --ink-4: #8a93a0;
+    --accent: #0e5b58;
+    --accent-dark: #0b4a47;
+    --accent-soft: #e2eeec;
+    --warn: #b86a2e;
+    --warn-soft: #f9efe4;
+    --cite: #1a5fb4;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+  a { color: inherit; }
+  .label { font-family: var(--mono); font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+
+  header { border-bottom: 1px solid var(--line); background: rgba(250,250,247,.9); backdrop-filter: saturate(140%) blur(8px); position: sticky; top: 0; z-index: 20; }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .brand svg { width: 26px; height: 24px; flex: none; }
+  .brand .wm { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; color: var(--ink); }
+  .brand .by { font-size: 12px; color: var(--ink-3); margin-left: 2px; padding-top: 4px; }
+  .brand .by b { color: var(--accent); font-weight: 600; }
+  .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; color: var(--ink-2); }
+  .nav-links a { text-decoration: none; }
+  .nav-links a:hover { color: var(--accent); }
+  .btn { display: inline-block; text-decoration: none; background: var(--accent); color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14.5px; border: none; cursor: pointer; transition: background .15s; }
+  .btn:hover { background: var(--accent-dark); }
+  .btn-lg { padding: 15px 26px; font-size: 16px; }
+  .nav .btn { padding: 9px 16px; font-size: 13.5px; }
+  @media (max-width: 720px){ .nav-links a:not(.btn){ display:none; } .brand .by { display:none; } }
+
+  /* hero — leads with the real finding, not the category */
+  .hero { padding: 76px 0 48px; }
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; color: var(--accent); }
+  .hero .eyebrow::before { content:""; width: 22px; height: 1px; background: var(--accent); opacity: .5; }
+  .hero h1 { font-size: 50px; line-height: 1.1; letter-spacing: -0.03em; font-weight: 700; max-width: 22ch; margin-bottom: 14px; }
+  .hero h1 .accent { color: var(--accent); }
+  .hero .kicker-q { font-family: var(--mono); font-size: 17px; color: var(--warn); font-weight: 600; margin-bottom: 22px; }
+  .hero .lead { font-size: 18.5px; line-height: 1.6; color: var(--ink-2); max-width: 62ch; margin-bottom: 30px; }
+  .hero .lead strong { color: var(--ink); font-weight: 600; }
+  .hero-cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .hero-note { margin-top: 18px; font-size: 14px; color: var(--ink-3); max-width: 60ch; }
+  @media (max-width: 720px){ .hero { padding: 52px 0 36px; } .hero h1 { font-size: 34px; } }
+
+  section.blk { padding: 68px 0; }
+  .sec-head { margin-bottom: 38px; }
+  .sec-head .label { display: block; margin-bottom: 12px; }
+  .sec-head h2 { font-size: 31px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; margin-bottom: 12px; }
+  .sec-head p { font-size: 16.5px; color: var(--ink-2); max-width: 64ch; }
+
+  /* what it's for */
+  .fors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .for { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 24px 26px; }
+  .for h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .for p { font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+  @media (max-width: 720px){ .fors { grid-template-columns: 1fr; } }
+
+  /* findings — the proof spine, from the live engagement */
+  .findings-blk { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .finding { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 26px 30px; margin-bottom: 18px; }
+  .finding:last-child { margin-bottom: 0; }
+  .finding .kind { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+  .finding h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 10px; }
+  .finding p { font-size: 15px; line-height: 1.65; color: var(--ink-2); max-width: 74ch; }
+  .finding blockquote { font-family: var(--mono); font-size: 13px; line-height: 1.6; color: var(--ink); background: var(--warn-soft); border-left: 3px solid var(--warn); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 14px 0; max-width: 70ch; }
+  .cites { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 14px; }
+  .cite { font-family: var(--mono); font-size: 12px; color: var(--cite); }
+  .cite b { font-weight: 700; }
+  .cite span { color: var(--ink-3); }
+  .finding .cascade-note { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line-2); }
+  .finding .cascade-note .cn { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--warn); margin-bottom: 6px; }
+
+  /* trust */
+  .trust { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .trust .card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 22px 26px; display: flex; gap: 14px; }
+  .trust .card .check { color: var(--accent); font-weight: 800; font-size: 18px; flex: none; }
+  .trust .card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .trust .card p { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+  .trust-stat { font-family: var(--mono); font-size: 13px; color: var(--ink-3); margin-bottom: 24px; }
+  .trust-stat b { color: var(--ink); font-weight: 700; }
+  @media (max-width: 720px){ .trust { grid-template-columns: 1fr; } }
+
+  /* capabilities */
+  .caps { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
+  .cap { padding: 26px 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .cap:nth-child(even){ border-right: 0; }
+  .cap:nth-last-child(-n+2){ border-bottom: 0; }
+  .cap .ix { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
+  .cap h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 7px; }
+  .cap p { font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+  @media (max-width: 720px){ .caps { grid-template-columns: 1fr; } .cap { border-right: 0 !important; } }
+
+  /* industries */
+  .inds { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .ind { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 22px 26px; }
+  .ind h3 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; color: var(--accent); margin-bottom: 6px; }
+  .ind p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+  .inds-note { margin-top: 20px; font-size: 14px; color: var(--ink-3); max-width: 62ch; }
+  @media (max-width: 720px){ .inds { grid-template-columns: 1fr; } }
+
+  /* engagement steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .step { background: var(--surface); padding: 28px 30px; }
+  .step .num { font-family: var(--mono); font-size: 14px; font-weight: 700; color: #fff; background: var(--accent); width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .step h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .step p { font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+  @media (max-width: 720px){ .steps { grid-template-columns: 1fr; } }
+
+  /* start / lead form */
+  .start { background: linear-gradient(180deg, var(--accent-soft), var(--bg)); border-top: 1px solid var(--line); }
+  .start-inner { display: grid; grid-template-columns: 1.3fr 1fr; gap: 44px; align-items: center; }
+  .start .label { color: var(--accent); display: block; margin-bottom: 14px; }
+  .start h2 { font-size: 30px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; margin-bottom: 14px; }
+  .start p { font-size: 16px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px; }
+  .start .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 28px; box-shadow: 0 10px 34px rgba(14,91,88,.12); }
+  .start .card .kick { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+  .start .card .name { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .start .card .desc { font-size: 14.5px; color: var(--ink-2); line-height: 1.6; margin-bottom: 20px; }
+  .lead-form { display: flex; flex-direction: column; gap: 10px; }
+  .fld { font-family: var(--sans); font-size: 14.5px; padding: 11px 12px; border: 1px solid var(--line-2); border-radius: 8px; background: #fff; color: var(--ink); width: 100%; }
+  .fld:focus { outline: none; border-color: var(--accent); }
+  .hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+  .form-ok { font-size: 14.5px; color: var(--accent); font-weight: 600; }
+  @media (max-width: 720px){ .start-inner { grid-template-columns: 1fr; gap: 28px; } }
+
+  footer { border-top: 1px solid var(--line); padding: 30px 0 48px; }
+  .foot-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .fine { font-size: 12.5px; color: var(--ink-4); max-width: 66ch; line-height: 1.55; }
+  .cr { font-size: 12.5px; color: var(--ink-3); white-space: nowrap; }
+  .cr b { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <!-- Kaskad logo-mark, from kaskad-landing-v2 -->
+      <svg viewBox="0 0 60 56" fill="none" role="img" aria-label="Kaskad">
+        <rect x="0" y="30" width="5" height="13" rx="0.8" fill="#a3d4d2"/>
+        <rect x="7" y="24" width="5" height="19" rx="0.8" fill="#5fb8b5"/>
+        <rect x="14" y="18" width="5" height="25" rx="0.8" fill="#2d9895"/>
+        <rect x="21" y="12" width="5.5" height="31" rx="0.8" fill="#0e5b58"/>
+        <path d="M25 28L25 22L47 4L53 10L31 26Z" fill="#0e5b58"/>
+        <path d="M25 28L25 34L47 52L53 46L31 30Z" fill="#0b4a47"/>
+      </svg>
+      <span class="wm">Kaskad</span>
+      <span class="by">by <a href="../" style="text-decoration:none;"><b>Clearlaw</b></a></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#findings">Real findings</a>
+      <a href="#trust">Why trust it</a>
+      <a href="#engagement">How it works</a>
+      <a class="btn" href="#start">Run your project</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO — the finding is the headline ============ -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow label">Obligation intelligence for complex portfolios</span>
+    <h1>Your PPA says you can expand. <span class="accent">Your financing agreement says you can't.</span></h1>
+    <p class="kicker-q">Which answer is your team working from?</p>
+    <p class="lead">That's a real finding. A top-tier US renewable energy developer is running Kaskad across an operating renewable-energy project — a dozen-plus agreements: site leases and their amendment chains, the PPA, interconnection, the financing stack, and the land documents wrapped around them. <strong>Every deadline, renewal window, and notice requirement — cross-referenced across the whole set and resolved to the calendar.</strong></p>
+    <div class="hero-cta">
+      <a class="btn btn-lg" href="#start">Run one of your projects through it</a>
+      <a class="btn btn-lg" style="background:transparent; color:var(--ink); border:1px solid var(--line-2);" href="#findings">See the findings</a>
+    </div>
+    <p class="hero-note">The findings below are drawn from that engagement. Identifying details have been changed; the substance hasn’t.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT IT'S FOR ============ -->
+<section class="blk">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">What it's for</span>
+      <h2>The expensive failures are rarely the event itself.</h2>
+      <p>They're the notice that didn't go out, the window that closed unnoticed, the answer taken from one document when the truth lived across two.</p>
+    </div>
+    <div class="fors">
+      <div class="for">
+        <h3>No surprises.</h3>
+        <p>Every deadline, renewal window, and notice requirement in the project, visible before it lands. Nothing sits dormant in a contract nobody has opened since closing.</p>
+      </div>
+      <div class="for">
+        <h3>When something breaks, you know your next move.</h3>
+        <p>An outage, a casualty, a late report from your operator. You see what you're contractually required to do, who has to be notified, and by when — in minutes, not after a scramble through the PDFs.</p>
+      </div>
+      <div class="for">
+        <h3>Small problems stay small.</h3>
+        <p>The miss that turns an operational hiccup into a lender conversation is the one nobody saw coming. That's what stops happening.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINDINGS — the proof spine ============ -->
+<section class="blk findings-blk" id="findings">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">From the live engagement</span>
+      <h2>Three questions this contract set was already answering.</h2>
+      <p>From the operating project described above, clause citations intact.</p>
+    </div>
+
+    <div class="finding">
+      <div class="kind">Cross-contract conflict</div>
+      <h3>The conflict from the headline, verbatim.</h3>
+      <p>In this project, the PPA grants expansion rights, subject to the offtaker's right of first offer. The financing agreement says this:</p>
+      <blockquote>"The Borrower shall not (nor shall it allow Holdco or the Project Company to) expand the Project pursuant to Section 20.2 of the Power Purchase Agreement."</blockquote>
+      <p>Whoever answers from the PPA alone answers wrong. The correct answer only exists across both documents.</p>
+      <div class="cites">
+        <span class="cite"><b>PPA §20.2</b> <span>· expansion rights</span></span>
+        <span class="cite"><b>Financing §6.23</b> <span>· expansion prohibited</span></span>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="kind">Deadline → termination right</div>
+      <h3>What stands between your offtaker and a termination right?</h3>
+      <p>In this project: one repair milestone and ninety days. The PPA sets a repair completion milestone. If repair isn't complete within 90 days of that date, the offtaker gains the right to terminate the PPA on written notice. Their asset manager isn't re-reading clauses to count days — every date in the chain sits on the calendar, from the milestone through the grace period to the end of the notice window.</p>
+      <div class="cites">
+        <span class="cite"><b>PPA §4.1</b> <span>· repair obligation</span></span>
+        <span class="cite"><b>PPA §2.4</b> <span>· early termination right</span></span>
+      </div>
+      <div class="cascade-note">
+        <div class="cn">The cascade</div>
+        <p>PPA termination means the loss of a Material Project Document — an Event of Default under the financing agreement with a 60-day cure. One missed operational date cascades from the offtaker to the lenders.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <div class="kind">Renewal window · two documents</div>
+      <h3>Who owns your letter of credit renewal, and which clock are they watching?</h3>
+      <p>This project's PPA requires the LC renewed at least 30 days before it expires, with proof delivered 15 days out. Miss the window and the offtaker may immediately draw the entire amount. The LC itself is issued under the financing agreement and auto-extends each year — unless the issuing bank opts out, which it may do up to that same 30-day mark. The bank's opt-out notice can arrive the exact day your replacement was due. One instrument, two documents, zero slack. A once-a-year task with no natural owner.</p>
+      <div class="cites">
+        <span class="cite"><b>PPA §11.1(C)</b> <span>· security duration and renewal</span></span>
+        <span class="cite"><b>Financing Ex. H-1</b> <span>· LC automatic extension</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY TRUST IT ============ -->
+<section class="blk" id="trust">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Why you can trust it</span>
+      <h2>Built to be checked.</h2>
+      <p class="trust-stat">The contract set yielded <b>~2,500 obligations</b> and <b>~1,500 defined terms</b>. Volume is the easy part. What makes it dependable:</p>
+    </div>
+    <div class="trust">
+      <div class="card">
+        <span class="check">✓</span>
+        <div>
+          <h3>Every obligation carries its verbatim clause and citation.</h3>
+          <p>Not a summary you have to take on faith: the actual contract language, with the section number, one click from every entry. Check any of it against your executed documents.</p>
+        </div>
+      </div>
+      <div class="card">
+        <span class="check">✓</span>
+        <div>
+          <h3>It reads the set, not the documents.</h3>
+          <p>When the current rent schedule lives in the fourth amendment, you see the current answer — and the old language is marked superseded, with dates. Defined terms resolve across every agreement.</p>
+        </div>
+      </div>
+      <div class="card">
+        <span class="check">✓</span>
+        <div>
+          <h3>Deadlines resolve to the calendar.</h3>
+          <p>"Within ninety (90) Days following the Repair Completion Milestone Date" becomes an actual date. Monthly reports, annual forecasts, renewal windows: recurring obligations carry their schedules.</p>
+        </div>
+      </div>
+      <div class="card">
+        <span class="check">✓</span>
+        <div>
+          <h3>Your team stays in control.</h3>
+          <p>Obligations arrive grouped by concern and filterable by document, party, and type — not as a 2,500-row spreadsheet. Anything your team doesn't track can be dismissed. The extraction is the starting point. Your team's judgment is the product.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPABILITIES ============ -->
+<section class="blk" style="padding-top: 12px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Inside the application</span>
+      <h2>Four views your operations team lives in.</h2>
+    </div>
+    <div class="caps">
+      <article class="cap">
+        <div class="ix">01 · Schedule</div>
+        <h3>Obligation schedule</h3>
+        <p>Every obligation across every contract, grouped by cadence — what's due this week, this quarter, this year — with each entry one click from its verbatim clause.</p>
+      </article>
+      <article class="cap">
+        <div class="ix">02 · Calibration</div>
+        <h3>Your definition of "important"</h3>
+        <p>Set what your team tracks once — payment deadlines, notice windows, reporting duties — and Kaskad respects it across every contract in the portfolio.</p>
+      </article>
+      <article class="cap">
+        <div class="ix">03 · Project data</div>
+        <h3>The variables contracts reference but don't define</h3>
+        <p>Milestone dates, capacity figures, counterparty details — the external facts your obligations depend on, kept alongside the clauses that consume them.</p>
+      </article>
+      <article class="cap">
+        <div class="ix">04 · Playbooks</div>
+        <h3>Scenario playbooks</h3>
+        <p>Pre-built cascade narratives: when an outage, casualty, or counterparty default hits, the chain of triggered obligations is already traced — across every agreement at once.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDUSTRIES ============ -->
+<section class="blk" style="padding-top: 12px;">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Where it fits</span>
+      <h2>Built for bespoke, high-stakes contract sets.</h2>
+    </div>
+    <div class="inds">
+      <div class="ind"><h3>Renewable energy</h3><p>PPAs, interconnection agreements, financing stacks, ground leases and their amendments.</p></div>
+      <div class="ind"><h3>Commercial real estate</h3><p>Leases and amendment chains, lender consents, estoppels, operating agreements.</p></div>
+      <div class="ind"><h3>Infrastructure &amp; P3</h3><p>Concession agreements, O&amp;M stacks, and the financing documents wrapped around them.</p></div>
+      <div class="ind"><h3>Construction</h3><p>Owner-side obligation tracking across the whole contract family.</p></div>
+    </div>
+    <p class="inds-note">The common thread: small teams responsible for tens to hundreds of negotiated agreements where a single missed window has seven-figure consequences.</p>
+  </div>
+</section>
+
+<!-- ============ ENGAGEMENT ============ -->
+<section class="blk" id="engagement" style="background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">What an engagement looks like</span>
+      <h2>Three steps. No integration, no IT project.</h2>
+    </div>
+    <div class="steps">
+      <article class="step">
+        <div class="num">1</div>
+        <h3>Send us one project's documents</h3>
+        <p>Executed PDFs: leases, PPA, interconnection, financing, amendments. No integration, no data migration.</p>
+      </article>
+      <article class="step">
+        <div class="num">2</div>
+        <h3>Receive the obligations layer</h3>
+        <p>The full contract set, extracted and cross-referenced in the application: every deadline, deliverable, right, and consequence — organized by concern and resolved to the calendar.</p>
+      </article>
+      <article class="step">
+        <div class="num">3</div>
+        <h3>Verify it</h3>
+        <p>Your GC and asset managers check the output against the source documents. Any entry, any agreement, down to the clause.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ START ============ -->
+<section class="blk start" id="start">
+  <div class="wrap start-inner">
+    <div>
+      <span class="label">Start here</span>
+      <h2>Run one of your projects through it.</h2>
+      <p>Pick the project whose contract set worries you most — the one with the amendments nobody has re-read since closing. Send us the documents and see what your contracts are already telling you.</p>
+    </div>
+    <div class="card">
+      <div class="kick">One project · real output</div>
+      <div class="name">Request an engagement</div>
+      <div class="desc">Same shape as the live engagement above: your documents in, the obligations layer back, verified by your own team against the source contracts.</div>
+      <form class="lead-form" id="contact-form">
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input class="fld" type="text" name="name" placeholder="Your name" required>
+        <input class="fld" type="email" name="email" placeholder="Work email" required>
+        <input class="fld" type="text" name="firm" placeholder="Company" required>
+        <input class="fld" type="text" name="matter" placeholder="Asset type / number of projects">
+        <button class="btn btn-lg" type="submit" style="width:100%;">Start the conversation</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <p class="fine">Kaskad, by Clearlaw, assists legal and operations teams with contract analysis and obligation tracking. It does not provide legal advice; extracted obligations are verified by the client's own team against source documents.</p>
+    <p class="cr"><b>Kaskad</b> · © 2026 Clearlaw</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var LEADS_ENDPOINT = "https://clearlaw-leads.jordan-204.workers.dev/api/lead";
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = {};
+    new FormData(form).forEach(function(v, k){ data[k] = v; });
+    data.source = 'kaskad';
+    var btn = form.querySelector('button[type=submit]');
+    btn.disabled = true; btn.textContent = 'Sending…';
+    fetch(LEADS_ENDPOINT, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (!res.ok) throw new Error(res.error || 'Something went wrong');
+        form.innerHTML = '<p class="form-ok">Thanks — we got it. You’ll hear from us at ' + (data.email || 'your email') + '.</p>';
+      })
+      .catch(function(err){
+        btn.disabled = false; btn.textContent = 'Start the conversation';
+        alert((err && err.message) || 'Something went wrong — email hello@clearlaw.ai.');
+      });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LitigationOS — the operating system for small-firm litigation · by Clearlaw</title>
+<meta name="description" content="LitigationOS, by Clearlaw — the operating system for small-firm litigation. Run every case faster, and still bill for the work only a lawyer can do. Built and proven in a working practice — held at your firm, compliance-first, light setup. Start with Discovery Loop.">
+<link rel="canonical" href="https://clearlaw.ai/litigationos/">
+<link rel="icon" href="../assets/litos-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-litos.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LitigationOS">
+<meta property="og:title" content="LitigationOS — the operating system for small-firm litigation">
+<meta property="og:description" content="Run every case faster — and still bill for the work only a lawyer can do. Built and proven in a working practice. Start with Discovery Loop.">
+<meta property="og:url" content="https://clearlaw.ai/litigationos/">
+<meta property="og:image" content="https://clearlaw.ai/assets/og/litigationos.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* LitigationOS brand — >_ prompt mark in oxblood, warm-paper palette.
+     Name decided 2026-08-13 (LitigationOS; in-app "LitOS") — see naming/Coined-Names-Round-3-2026-08-08.md.
+     Mark matches the portal's litos-mark.svg (D-056). Palette carried over from the prior brand work. */
+  :root {
+    --bg: #f8f6f1;             /* warm paper */
+    --surface: #ffffff;
+    --surface-2: #f1eee7;
+    --line: #e2ddd4;
+    --line-2: #c8c0b4;
+    --ink: #2c2a26;
+    --ink-2: #494540;
+    --ink-3: #6f675e;
+    --ink-4: #9a9186;
+    --brand: #7a1f2b;          /* oxblood */
+    --brand-dark: #641823;
+    --brand-soft: #f3e6e8;
+    --steel: #35567a;          /* secondary */
+    --gold: #9a6b00;           /* "billable hour" warm highlight */
+    --gold-soft: #f2ead6;
+    --serif: "Source Serif 4", Georgia, serif;
+    --sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+  a { color: inherit; }
+  .label { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* header */
+  header { border-bottom: 1px solid var(--line); background: rgba(248,246,241,.88); backdrop-filter: saturate(140%) blur(8px); position: sticky; top: 0; z-index: 20; }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .brand svg { width: 20px; height: 24px; flex: none; }
+  .brand .wm { font-family: var(--serif); font-weight: 600; font-size: 21px; letter-spacing: -0.01em; line-height: 1; }
+  .brand .by { font-size: 12px; color: var(--ink-3); letter-spacing: .02em; margin-left: 2px; padding-top: 4px; }
+  .brand .by b { color: var(--brand); font-weight: 600; }
+  .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; color: var(--ink-2); }
+  .nav-links a { text-decoration: none; }
+  .nav-links a:hover { color: var(--brand); }
+  .btn { display: inline-block; text-decoration: none; background: var(--brand); color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14.5px; border: none; cursor: pointer; transition: background .15s; }
+  .btn:hover { background: var(--brand-dark); }
+  .btn-lg { padding: 15px 26px; font-size: 16px; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-2); }
+  .btn-ghost:hover { background: var(--surface-2); border-color: var(--ink-3); }
+  .nav .btn { padding: 9px 16px; font-size: 13.5px; }
+  @media (max-width: 720px){ .nav-links a:not(.btn){ display:none; } .brand .by { display: none; } }
+
+  /* hero */
+  .hero { padding: 84px 0 40px; }
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; color: var(--brand); }
+  .hero .eyebrow::before { content:""; width: 22px; height: 1px; background: var(--brand); opacity: .5; }
+  .hero h1 { font-family: var(--serif); font-size: 54px; line-height: 1.08; letter-spacing: -0.015em; font-weight: 600; max-width: 21ch; margin-bottom: 24px; }
+  .hero h1 .gold { color: var(--gold); }
+  .hero .lead { font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 60ch; margin-bottom: 32px; }
+  .hero .lead strong { color: var(--ink); font-weight: 600; }
+  .hero-cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .hero-note { margin-top: 18px; font-size: 14px; color: var(--ink-3); }
+  @media (max-width: 720px){ .hero { padding: 52px 0 32px; } .hero h1 { font-size: 36px; } .hero .lead { font-size: 17px; } }
+
+  /* the name — story strip */
+  .why-name { margin: 10px auto 0; }
+  .why-name-inner { border-left: 4px solid var(--brand); background: var(--brand-soft); border-radius: 0 12px 12px 0; padding: 22px 28px; display: flex; gap: 20px; align-items: center; }
+  .why-name-inner svg { width: 34px; height: 41px; flex: none; }
+  .why-name-inner p { font-family: var(--serif); font-size: 17.5px; line-height: 1.55; color: var(--ink); max-width: 72ch; }
+  .why-name-inner p b { color: var(--brand); }
+  @media (max-width: 720px){ .why-name-inner { padding: 18px 20px; gap: 14px; } .why-name-inner p { font-size: 15.5px; } }
+
+  /* proof-of-life band */
+  .proof { margin: 48px 0 0; }
+  .proof-inner { background: var(--ink); color: #f4f1ec; border-radius: 16px; padding: 44px 48px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+  .proof .label { color: #a89f92; margin-bottom: 16px; }
+  .proof h2 { font-family: var(--serif); font-size: 27px; line-height: 1.25; letter-spacing: -0.01em; font-weight: 600; margin-bottom: 14px; }
+  .proof p { font-size: 15.5px; line-height: 1.6; color: #cfc8bd; }
+  .proof .stats { display: flex; flex-direction: column; gap: 18px; border-left: 1px solid #4a453e; padding-left: 36px; }
+  .proof .stat .n { font-family: var(--serif); font-size: 30px; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
+  .proof .stat .k { font-size: 13px; color: #b0a89b; margin-top: 2px; }
+  @media (max-width: 720px){ .proof-inner { grid-template-columns: 1fr; padding: 32px 26px; gap: 28px; } .proof .stats { border-left: 0; border-top: 1px solid #4a453e; padding-left: 0; padding-top: 24px; flex-direction: row; flex-wrap: wrap; gap: 28px; } }
+
+  /* generic section */
+  section.blk { padding: 72px 0; }
+  .sec-head { margin-bottom: 40px; }
+  .sec-head .label { display: block; margin-bottom: 14px; }
+  .sec-head h2 { font-family: var(--serif); font-size: 33px; line-height: 1.18; letter-spacing: -0.01em; font-weight: 600; margin-bottom: 14px; }
+  .sec-head p { font-size: 17px; color: var(--ink-2); max-width: 62ch; }
+
+  /* billable hour POV */
+  .pov { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .pov .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .pov .col h3 { font-size: 19px; letter-spacing: -0.01em; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .pov .col.tension h3 { color: var(--ink-3); }
+  .pov .col.answer h3 { color: var(--gold); }
+  .pov .col p { font-size: 15.5px; color: var(--ink-2); line-height: 1.6; }
+  .pov .col .tag { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; padding: 3px 9px; border-radius: 4px; }
+  .pov .col.tension .tag { color: var(--ink-4); border: 1px solid var(--line-2); }
+  .pov .col.answer .tag { background: var(--gold-soft); color: var(--gold); }
+  @media (max-width: 720px){ .pov .cols { grid-template-columns: 1fr; gap: 26px; } }
+
+  /* the system — module grid */
+  .modules { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
+  .mod { padding: 26px 28px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); position: relative; }
+  .mod:nth-child(even){ border-right: 0; }
+  .mod:nth-last-child(-n+2){ border-bottom: 0; }
+  .mod .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .mod .ix { font-size: 10.5px; color: var(--brand); letter-spacing: .1em; text-transform: uppercase; font-weight: 700; }
+  .mod .avail { font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; padding: 3px 9px; border-radius: 20px; }
+  .mod .avail.now { background: var(--brand-soft); color: var(--brand); }
+  .mod .avail.sys { background: var(--surface-2); color: var(--ink-4); border: 1px solid var(--line); }
+  .mod h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 7px; }
+  .mod p { font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+  @media (max-width: 720px){ .modules { grid-template-columns: 1fr; } .mod { border-right: 0 !important; } .mod:nth-last-child(2){ border-bottom: 1px solid var(--line); } }
+
+  /* trust */
+  .trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .trust .card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 24px 24px; }
+  .trust .card h3 { font-size: 16px; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .trust .card p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+  @media (max-width: 720px){ .trust { grid-template-columns: 1fr; } }
+
+  /* start here — discovery loop entry */
+  .start { background: linear-gradient(180deg, var(--brand-soft), var(--bg)); border-top: 1px solid var(--line); }
+  .start-inner { display: grid; grid-template-columns: 1.3fr 1fr; gap: 44px; align-items: center; }
+  .start .label { color: var(--brand); display: block; margin-bottom: 14px; }
+  .start h2 { font-family: var(--serif); font-size: 31px; line-height: 1.18; letter-spacing: -0.01em; font-weight: 600; margin-bottom: 14px; }
+  .start p { font-size: 16px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px; }
+  .start .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 28px; box-shadow: 0 10px 34px rgba(122,31,43,.10); }
+  .start .card .kick { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); font-weight: 700; margin-bottom: 10px; }
+  .start .card .name { font-family: var(--serif); font-size: 23px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .start .card .desc { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; margin-bottom: 20px; }
+  @media (max-width: 720px){ .start-inner { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* final cta */
+  .final { text-align: center; padding: 84px 0; }
+  .final h2 { font-family: var(--serif); font-size: 35px; letter-spacing: -0.01em; font-weight: 600; margin-bottom: 14px; max-width: 24ch; margin-left: auto; margin-right: auto; }
+  .final p { font-size: 17px; color: var(--ink-2); max-width: 56ch; margin: 0 auto 28px; }
+
+  /* lead form */
+  .lead-form { display: flex; flex-direction: column; gap: 10px; }
+  .fld { font-family: var(--sans); font-size: 14.5px; padding: 11px 12px; border: 1px solid var(--line-2); border-radius: 8px; background: #fff; color: var(--ink); width: 100%; box-sizing: border-box; }
+  .fld:focus { outline: none; border-color: var(--brand); }
+  textarea.fld { resize: vertical; }
+  .hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+  .form-ok { font-size: 14.5px; color: var(--brand); font-weight: 600; }
+
+  footer { border-top: 1px solid var(--line); padding: 30px 0 48px; }
+  .foot-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .fine { font-size: 12.5px; color: var(--ink-4); max-width: 66ch; line-height: 1.55; }
+  .cr { font-size: 12.5px; color: var(--ink-3); letter-spacing: .03em; white-space: nowrap; }
+  .cr b { color: var(--brand); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <!-- >_ prompt mark, oxblood — matches portal litos-mark.svg (D-056) -->
+      <svg viewBox="0 0 40 48" role="img" aria-label="LitigationOS">
+        <path d="M7 13 L21 24 L7 35" fill="none" stroke="#7a1f2b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="22" y1="37.5" x2="34" y2="37.5" stroke="#7a1f2b" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <span class="wm">LitigationOS</span>
+      <span class="by">by <a href="../" style="text-decoration:none;"><b>Clearlaw</b></a></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#billable">The billable hour</a>
+      <a href="#system">The system</a>
+      <a href="#trust">Trust &amp; setup</a>
+      <a class="btn" href="#start">Run a set free</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow label">The operating system for small-firm litigation</span>
+    <h1>Move every case faster — and still bill for the work <span class="gold">only a lawyer can do.</span></h1>
+    <p class="lead">LitigationOS runs the whole arc of a litigation matter — intake, discovery, motions, deadlines — in one workspace built for how litigators actually work. <strong>It makes you faster without dissolving the billable hour</strong>, because the time it saves is the tedium, and the time it captures is the judgment the rules require you to spend.</p>
+    <div class="hero-cta">
+      <a class="btn btn-lg" href="#start">Start with Discovery Loop — run a set free</a>
+      <a class="btn btn-lg btn-ghost" href="#system">See the whole system</a>
+    </div>
+    <p class="hero-note">Built and proven in a working litigation practice. Light setup — it works with the file storage, email, and calendar you already use.</p>
+  </div>
+</section>
+
+<!-- ============ THE NAME — the OS story = the UPL answer ============ -->
+<div class="wrap why-name">
+  <div class="why-name-inner">
+    <svg viewBox="0 0 40 48" role="presentation">
+      <path d="M7 13 L21 24 L7 35" fill="none" stroke="#7a1f2b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="22" y1="37.5" x2="34" y2="37.5" stroke="#7a1f2b" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <p>An <b>operating system</b> runs the machine so the operator can do the real work. That's the product. <b>LitigationOS runs the frontline work</b> of the practice — and you stay the commander: reviewing with judgment, deciding strategy, signing your name. Inside the app, it answers to <b>LitOS</b>.</p>
+  </div>
+</div>
+
+<!-- ============ PROOF OF LIFE ============ -->
+<!-- Proof-band stats are definitional/system claims; see internal notes before changing. -->
+<div class="wrap">
+  <section class="proof">
+    <div class="proof-inner">
+      <div>
+        <span class="label">Built in a practice, not a lab</span>
+        <h2>This isn't a demo. A working litigation practice runs on it every day.</h2>
+        <p>LitigationOS was built inside a live practice and used on real matters under real deadlines — intake through discovery to filing. Every output is reviewed and verified by the attorney, the way the rules require. That's not a compliance footnote; it's the design.</p>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="n">Intake&nbsp;&rarr;&nbsp;filing</div>
+          <div class="k">the whole arc of a matter, run in one workspace</div>
+        </div>
+        <div class="stat">
+          <div class="n">Every&nbsp;deadline</div>
+          <div class="k">computed from your state's rules of civil procedure</div>
+        </div>
+        <div class="stat">
+          <div class="n">100%</div>
+          <div class="k">of outputs attorney-reviewed &amp; logged</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ THE BILLABLE-HOUR POV — the differentiated wedge ============ -->
+<section class="blk pov" id="billable">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Why this one is different</span>
+      <h2>Every other tool makes you efficient. Then efficiency eats your revenue.</h2>
+      <p>Firms that bill by the hour face a trap: the more the AI does, the fewer hours there are to bill. So the tools that promise speed quietly threaten the business model. LitigationOS is built around the opposite premise.</p>
+    </div>
+    <div class="cols">
+      <div class="col tension">
+        <h3><span class="tag">The trap</span></h3>
+        <p>A generic AI tool drafts the motion in seconds — and now there's nothing to bill for those hours. Adopt it firm-wide and you've automated away your own revenue, with no defensible way to charge for the judgment you still apply. That's why careful firms hesitate, and why the ones being pushed hardest — insurance defense, squeezed by carriers on efficiency — feel it most.</p>
+      </div>
+      <div class="col answer">
+        <h3><span class="tag">The LitigationOS answer</span></h3>
+        <p>Your bar rules make you responsible for whatever goes out under your signature — AI-assisted or not. That verification is real, billable work. LitigationOS does the work inside a per-case workspace that captures the time you actually spend: reviewing, correcting, deciding strategy. You bill for judgment instead of typing, move the tedium off your plate, and stay whole. Faster <em>and</em> defensible — with an audit trail to prove it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SYSTEM ============ -->
+<section class="blk" id="system">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">The system</span>
+      <h2>One workspace for the whole matter — not a drawer of point tools.</h2>
+      <p>LitigationOS carries a case from first contact to filing in a single place, with its own working memory so you can run several matters at once while the model works. Discovery Loop is live today; the rest of the system runs the practice it was built in, and comes online for your firm as we roll it out.</p>
+    </div>
+    <div class="modules">
+      <article class="mod">
+        <div class="top"><span class="ix">CORE</span></div>
+        <h3>The per-case workspace</h3>
+        <p>Each matter gets its own space with a running notes-and-prompt queue — the "working memory" that lets you keep seven or eight cases moving in parallel and pick each one up exactly where you left off.</p>
+      </article>
+      <article class="mod">
+        <div class="top"><span class="ix">01 · Discovery</span><span class="avail now">Start here</span></div>
+        <h3>Discovery Loop</h3>
+        <p>Gets your client's discovery answers without the three-week chase, cross-checks them against the case file for contradictions, and hands you clean, service-ready responses. Your entry point to the system. <a href="../discovery-loop/" style="color:var(--brand); font-weight:600; text-decoration:none;">Learn more →</a></p>
+      </article>
+      <article class="mod">
+        <div class="top"><span class="ix">02 · Motions</span></div>
+        <h3>Draft, red-team, and cite-check</h3>
+        <p>Draft a motion, then have the system argue against it and verify every citation before it leaves your desk — the review layer that catches what a tired 11pm read misses.</p>
+      </article>
+      <article class="mod">
+        <div class="top"><span class="ix">03 · Deadlines</span></div>
+        <h3>Deadlines, from the source of truth</h3>
+        <p>Deadlines computed from your state's rules of civil procedure and laid onto the calendar — not reconstructed from someone's notes. The dates don't rely on anyone remembering.</p>
+      </article>
+      <article class="mod">
+        <div class="top"><span class="ix">04 · Intake</span></div>
+        <h3>Intake to engagement</h3>
+        <p>Turn first contact into a structured matter and a drafted engagement letter — the front door, handled, so the case starts clean.</p>
+      </article>
+      <article class="mod">
+        <div class="top"><span class="ix">05 · Oversight</span></div>
+        <h3>The nightly conductor</h3>
+        <p>Every night the system rebuilds a per-case wiki, checks each matter, and every morning surfaces what slipped — the things that fall through the cracks between busy days.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST & SETUP ============ -->
+<section class="blk" id="trust" style="background:var(--surface-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Held at your firm</span>
+      <h2>Your practice. Your data. Not training somebody's replacement for you.</h2>
+      <p>The megaplayers want your matters on their platform. LitigationOS is the opposite posture — built compliance-first, for a firm that doesn't have an IT department.</p>
+    </div>
+    <div class="trust">
+      <div class="card">
+        <h3>Your data stays yours</h3>
+        <p>Confidential, encrypted, processed on zero-retention enterprise models that never train on your work. We're not building an AI firm to replace you with your own case files.</p>
+      </div>
+      <div class="card">
+        <h3>Compliance is the design</h3>
+        <p>Every AI output is attorney-reviewed before it's used, and the review is audit-logged for bar compliance. Trust isn't a promise on the page — it's a record you can produce.</p>
+      </div>
+      <div class="card">
+        <h3>Light setup, no IT</h3>
+        <p>It integrates with the file storage, email, and calendar you already run on. No migration, no platform to move to, no IT department required to get started.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ START HERE — DISCOVERY LOOP ENTRY ============ -->
+<section class="blk start" id="start">
+  <div class="wrap start-inner">
+    <div>
+      <span class="label">Start here</span>
+      <h2>See it work on one of your own cases — free.</h2>
+      <p>You don't have to adopt a whole system to find out if this is real. Start where the pain is sharpest: a discovery set that's pending right now.</p>
+      <p>Send us the set on your desk today. We compute the deadline, text your client a plain-language questionnaire link, and hand back clean responses plus an attorney-only contradiction memo. The first set is free, and everything you send is held in confidence — used only to run your set, never shared or trained on, and deleted on your request.</p>
+    </div>
+    <div class="card">
+      <div class="kick">Available now · your way in</div>
+      <div class="name">Discovery Loop</div>
+      <div class="desc">The first module inside LitigationOS — and the one that's live today. Prove the system on a real set of discovery before you change a single thing about how your firm works. <a href="../discovery-loop/" style="color:var(--brand); font-weight:600; text-decoration:none;">See the full Discovery Loop page →</a></div>
+      <form class="lead-form" id="contact-form">
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input class="fld" type="text" name="name" placeholder="Your name" required>
+        <input class="fld" type="email" name="email" placeholder="Work email" required>
+        <input class="fld" type="text" name="firm" placeholder="Firm name" required>
+        <input class="fld" type="tel" name="phone" placeholder="Phone (optional)">
+        <input class="fld" type="text" name="matter" placeholder="Case + response deadline, if known">
+        <button class="btn btn-lg" type="submit" style="width:100%;">Run my pending set free</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final">
+  <div class="wrap">
+    <h2>The AI era doesn't have to cost you the billable hour.</h2>
+    <p>Run your practice faster, keep the model that keeps you in business, and hold it all at your own firm. Start with one discovery set and see.</p>
+    <a class="btn btn-lg" href="#start">Run a set free</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <p class="fine">LitigationOS, by Clearlaw, is a tool for licensed attorneys. It assists with fact-gathering, analysis, and drafting; it does not give legal advice, and nothing it produces is filed or served without attorney review and, where required, client verification under oath. LitigationOS reduces time spent on litigation tasks; it does not guarantee outcomes.</p>
+    <p class="cr"><b>LitigationOS</b> · © 2026 Clearlaw</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var LEADS_ENDPOINT = "https://clearlaw-leads.jordan-204.workers.dev/api/lead";
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = {};
+    new FormData(form).forEach(function(v, k){ data[k] = v; });
+    data.source = 'litigationos';
+    var btn = form.querySelector('button[type=submit]');
+    if (!LEADS_ENDPOINT) { /* graceful fallback until the worker is live */
+      location.href = 'mailto:hello@clearlaw.ai?subject=' + encodeURIComponent('LitigationOS — run my pending discovery set free') +
+        '&body=' + encodeURIComponent('Name: ' + (data.name||'') + '\nEmail: ' + (data.email||'') + '\nFirm: ' + (data.firm||'') + '\nPhone: ' + (data.phone||'') + '\nMatter: ' + (data.matter||'') + '\n\n' + (data.message||''));
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Sending\u2026';
+    fetch(LEADS_ENDPOINT, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (!res.ok) throw new Error(res.error || 'Something went wrong');
+        form.innerHTML = '<p class="form-ok">Thanks \u2014 we got it. You\u2019ll hear from us at ' + (data.email || 'your email') + '.</p>';
+      })
+      .catch(function(err){
+        btn.disabled = false; btn.textContent = 'Run my pending set free';
+        alert((err && err.message) || 'Something went wrong \u2014 email hello@clearlaw.ai.');
+      });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../og-src/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1584px; height: 396px; background: #fbfbf9; font-family: "Inter", sans-serif; color: #101623;
+         position: relative; overflow: hidden; }
+  .rule { position: absolute; right: 0; top: 0; bottom: 0; width: 12px; background: #22346b; }
+  /* safe zone: avatar covers bottom-left; content lives center-right */
+  .content { position: absolute; left: 480px; right: 90px; top: 50%; transform: translateY(-50%); }
+  .brand { display: flex; align-items: center; gap: 14px; font-weight: 700; font-size: 30px; letter-spacing: -0.02em; margin-bottom: 24px; }
+  .brand .glyph { width: 38px; height: 38px; border-radius: 9px; background: #22346b; position: relative; }
+  .brand .glyph::after { content: ""; position: absolute; top: 10px; right: 10px; width: 10px; height: 10px; border-radius: 50%; background: #fff; }
+  h1 { font-size: 52px; line-height: 1.16; letter-spacing: -0.025em; font-weight: 600; max-width: 21ch; }
+  h1 .hl { color: #22346b; }
+  .url { margin-top: 22px; font-family: "JetBrains Mono", monospace; font-size: 21px; font-weight: 600; color: #57616f; }
+</style>
+</head>
+<body>
+  <div class="rule"></div>
+  <div class="content">
+    <div class="brand"><span class="glyph"></span>Clearlaw</div>
+    <h1>The right answer out of legal data — <span class="hl">with a record you can defend.</span></h1>
+    <div class="url">clearlaw.ai</div>
+  </div>
+</body>
+</html>

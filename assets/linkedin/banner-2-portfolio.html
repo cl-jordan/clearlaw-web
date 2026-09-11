@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../og-src/fonts/fonts.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1584px; height: 396px; background: #fbfbf9; font-family: "Inter", sans-serif; color: #101623;
+         position: relative; overflow: hidden; }
+  .rule { position: absolute; right: 0; top: 0; bottom: 0; width: 12px; background: #22346b; }
+  .content { position: absolute; left: 480px; right: 90px; top: 46px; }
+  .brand { display: flex; align-items: center; gap: 13px; font-weight: 700; font-size: 27px; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .brand .glyph { width: 34px; height: 34px; border-radius: 8px; background: #22346b; position: relative; }
+  .brand .glyph::after { content: ""; position: absolute; top: 9px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: #fff; }
+  h1 { font-size: 46px; line-height: 1.15; letter-spacing: -0.025em; font-weight: 600; }
+  h1 .hl { color: #22346b; }
+  .products { position: absolute; left: 480px; right: 90px; bottom: 44px; display: flex; align-items: flex-start; gap: 38px; border-top: 1px solid #e5e4dd; padding-top: 22px; }
+  .prod { display: flex; align-items: flex-start; gap: 10px; }
+  .chip { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center;
+          font-weight: 800; font-size: 12px; letter-spacing: -0.05em; flex: none; margin-top: 1px; }
+  .prod .name { font-weight: 700; font-size: 20px; letter-spacing: -0.01em; line-height: 1.2; }
+  .prod small { display: block; font-weight: 500; font-size: 12.5px; color: #8b93a0; margin-top: 3px; line-height: 1.35; }
+  .lo .chip { background: #f3e6e8; }
+  .lo .name { color: #7a1f2b; font-family: "Source Serif 4", Georgia, serif; }
+  .ks .chip { background: #ffffff; border: 1px solid #d8e6e4; }
+  .ks .name { color: #0e5b58; }
+  /* EDGAR Ready brand-mark, faithful to edgarready.ai globals.css:
+     forest chip, lime ER lettermark */
+  .ed .chip { background: #153c31; color: #d9ef73; }
+  .ed .name { color: #153c31; }
+  /* Value Recovery has no product brand — it's a Clearlaw service line, so it carries the parent mark */
+  .vr .chip { background: #22346b; position: relative; }
+  .vr .chip::after { content: ""; position: absolute; top: 7px; right: 7px; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+  .vr .name { color: #22346b; }
+</style>
+</head>
+<body>
+  <div class="rule"></div>
+  <div class="content">
+    <div class="brand"><span class="glyph"></span>Clearlaw · applied legal-AI studio</div>
+    <h1>The right answer out of legal data —<br><span class="hl">with a record you can defend.</span></h1>
+  </div>
+  <div class="products">
+    <div class="prod lo">
+      <span class="chip"><svg width="15" height="18" viewBox="0 0 40 48"><path d="M7 13 L21 24 L7 35" fill="none" stroke="#7a1f2b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><line x1="22" y1="37.5" x2="34" y2="37.5" stroke="#7a1f2b" stroke-width="6" stroke-linecap="round"/></svg></span>
+      <span><span class="name">LitigationOS</span><small>the litigation practice OS</small></span>
+    </div>
+    <div class="prod ks">
+      <span class="chip"><!-- real Kaskad logo-mark from kaskad-landing-v2.html -->
+        <svg width="18" height="17" viewBox="0 0 60 56" fill="none">
+          <rect x="0" y="30" width="5" height="13" rx="0.8" fill="#a3d4d2"/>
+          <rect x="7" y="24" width="5" height="19" rx="0.8" fill="#5fb8b5"/>
+          <rect x="14" y="18" width="5" height="25" rx="0.8" fill="#2d9895"/>
+          <rect x="21" y="12" width="5.5" height="31" rx="0.8" fill="#0e5b58"/>
+          <path d="M25 28L25 22L47 4L53 10L31 26Z" fill="#0e5b58"/>
+          <path d="M25 28L25 34L47 52L53 46L31 30Z" fill="#0b4a47"/>
+        </svg></span>
+      <span><span class="name">Kaskad</span><small>obligation intelligence</small></span>
+    </div>
+    <div class="prod ed">
+      <span class="chip">ER</span>
+      <span><span class="name">EDGAR Ready</span><small>K-12 audit readiness</small></span>
+    </div>
+    <div class="prod vr">
+      <span class="chip"></span>
+      <span><span class="name">Value Recovery</span><small>hidden value, recovered</small></span>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discovery Loop — get your client's discovery answers without the chase · by LitigationOS</title>
+<meta name="description" content="Discovery Loop, by LitigationOS — the discovery bottleneck was never the draft, it's getting your client to answer. Plain-language answers your client finishes from their phone, cross-checked against your case file, compiled into a service-ready response. No scheduling, no chasing, no IT setup.">
+<link rel="canonical" href="https://clearlaw.ai/discovery-loop/">
+<link rel="icon" href="../assets/litos-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-litos.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="LitigationOS">
+<meta property="og:title" content="Discovery Loop — get your client’s discovery answers without the chase">
+<meta property="og:description" content="Plain-language answers your client finishes from their phone, cross-checked against your case file, compiled into a service-ready response. No scheduling, no chasing, no IT setup.">
+<meta property="og:url" content="https://clearlaw.ai/discovery-loop/">
+<meta property="og:image" content="https://clearlaw.ai/assets/og/discovery-loop.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Discovery Loop landing — faithful to GTM doc Rev 2 (leads with the client-answer bottleneck,
+     Primary ICP: solo/small CA plaintiff contingency firms). Discovery Loop is the here-and-now
+     product; LitigationOS ("LitOS") is the parent product/vision it sits under.
+     Brand system carried from litigationos-landing-v3.html: >_ prompt mark, oxblood on warm paper. */
+  :root {
+    --bg: #f8f6f1;             /* warm paper */
+    --surface: #ffffff;
+    --surface-2: #f1eee7;
+    --line: #e2ddd4;
+    --line-2: #c8c0b4;
+    --ink: #2c2a26;
+    --ink-2: #494540;
+    --ink-3: #6f675e;
+    --ink-4: #9a9186;
+    --brand: #7a1f2b;          /* oxblood */
+    --brand-dark: #641823;
+    --brand-soft: #f3e6e8;
+    --steel: #35567a;          /* secondary */
+    --gold: #9a6b00;           /* "billable hour" warm highlight */
+    --gold-soft: #f2ead6;
+    --serif: "Source Serif 4", Georgia, serif;
+    --sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+  a { color: inherit; }
+  .label { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* header */
+  header { border-bottom: 1px solid var(--line); background: rgba(248,246,241,.88); backdrop-filter: saturate(140%) blur(8px); position: sticky; top: 0; z-index: 20; }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+  .brand { display: flex; align-items: center; gap: 11px; }
+  .brand svg { width: 20px; height: 24px; flex: none; }
+  .brand .wm { font-family: var(--serif); font-weight: 600; font-size: 21px; letter-spacing: -0.01em; line-height: 1; }
+  .brand .wm .sub { color: var(--brand); }
+  .brand .by { font-size: 12px; color: var(--ink-3); letter-spacing: .02em; margin-left: 2px; padding-top: 4px; }
+  .brand .by b { color: var(--brand); font-weight: 600; }
+  .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; color: var(--ink-2); }
+  .nav-links a { text-decoration: none; }
+  .nav-links a:hover { color: var(--brand); }
+  .btn { display: inline-block; text-decoration: none; background: var(--brand); color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14.5px; border: none; cursor: pointer; transition: background .15s; }
+  .btn:hover { background: var(--brand-dark); }
+  .btn-lg { padding: 15px 26px; font-size: 16px; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-2); }
+  .btn-ghost:hover { background: var(--surface-2); border-color: var(--ink-3); }
+  .nav .btn { padding: 9px 16px; font-size: 13.5px; }
+  @media (max-width: 720px){ .nav-links a:not(.btn){ display:none; } .brand .by { display: none; } }
+
+  /* hero */
+  .hero { padding: 84px 0 40px; }
+  .hero .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; color: var(--brand); }
+  .hero .eyebrow::before { content:""; width: 22px; height: 1px; background: var(--brand); opacity: .5; }
+  .hero h1 { font-family: var(--serif); font-size: 54px; line-height: 1.08; letter-spacing: -0.015em; font-weight: 600; max-width: 20ch; margin-bottom: 24px; }
+  .hero h1 .gold { color: var(--gold); }
+  .hero .lead { font-size: 19px; line-height: 1.6; color: var(--ink-2); max-width: 60ch; margin-bottom: 32px; }
+  .hero .lead strong { color: var(--ink); font-weight: 600; }
+  .hero-cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .hero-note { margin-top: 18px; font-size: 14px; color: var(--ink-3); }
+  @media (max-width: 720px){ .hero { padding: 52px 0 32px; } .hero h1 { font-size: 35px; } .hero .lead { font-size: 17px; } }
+
+  /* why-now hook strip */
+  .hook { margin: 10px auto 0; }
+  .hook-inner { border-left: 4px solid var(--brand); background: var(--brand-soft); border-radius: 0 12px 12px 0; padding: 22px 28px; display: flex; gap: 20px; align-items: center; }
+  .hook-inner svg { width: 34px; height: 41px; flex: none; }
+  .hook-inner p { font-family: var(--serif); font-size: 17.5px; line-height: 1.55; color: var(--ink); max-width: 72ch; }
+  .hook-inner p b { color: var(--brand); }
+  @media (max-width: 720px){ .hook-inner { padding: 18px 20px; gap: 14px; } .hook-inner p { font-size: 15.5px; } }
+
+  /* proof-of-life band */
+  .proof { margin: 48px 0 0; }
+  .proof-inner { background: var(--ink); color: #f4f1ec; border-radius: 16px; padding: 44px 48px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+  .proof .label { color: #a89f92; margin-bottom: 16px; }
+  .proof h2 { font-family: var(--serif); font-size: 27px; line-height: 1.25; letter-spacing: -0.01em; font-weight: 600; margin-bottom: 14px; }
+  .proof p { font-size: 15.5px; line-height: 1.6; color: #cfc8bd; }
+  .proof .stats { display: flex; flex-direction: column; gap: 18px; border-left: 1px solid #4a453e; padding-left: 36px; }
+  .proof .stat .n { font-family: var(--serif); font-size: 30px; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
+  .proof .stat .k { font-size: 13px; color: #b0a89b; margin-top: 2px; }
+  @media (max-width: 720px){ .proof-inner { grid-template-columns: 1fr; padding: 32px 26px; gap: 28px; } .proof .stats { border-left: 0; border-top: 1px solid #4a453e; padding-left: 0; padding-top: 24px; flex-direction: row; flex-wrap: wrap; gap: 28px; } }
+
+  /* generic section */
+  section.blk { padding: 72px 0; }
+  .sec-head { margin-bottom: 40px; }
+  .sec-head .label { display: block; margin-bottom: 14px; }
+  .sec-head h2 { font-family: var(--serif); font-size: 33px; line-height: 1.18; letter-spacing: -0.01em; font-weight: 600; margin-bottom: 14px; }
+  .sec-head p { font-size: 17px; color: var(--ink-2); max-width: 62ch; }
+
+  /* how it works — numbered steps */
+  .steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .step { background: var(--surface); padding: 28px 30px; }
+  .step .num { font-family: var(--serif); font-size: 15px; font-weight: 700; color: #fff; background: var(--brand); width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .step h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .step p { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+  @media (max-width: 720px){ .steps { grid-template-columns: 1fr; } }
+
+  /* pillars — 2x2 */
+  .pillars { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .pillar { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 26px 28px; }
+  .pillar .k { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); font-weight: 700; margin-bottom: 12px; }
+  .pillar.bill .k { color: var(--gold); }
+  .pillar h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 9px; }
+  .pillar p { font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+  @media (max-width: 720px){ .pillars { grid-template-columns: 1fr; } }
+
+  /* both sides band */
+  .bothsides { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .bothsides .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 8px; }
+  .bothsides .item { }
+  .bothsides .item h3 { font-size: 16px; letter-spacing: -0.01em; margin-bottom: 7px; }
+  .bothsides .item p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+  @media (max-width: 720px){ .bothsides .row { grid-template-columns: 1fr; } }
+
+  /* objection FAQ */
+  .faq { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .qa { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 22px 26px; }
+  .qa .q { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .qa .a { font-size: 15px; color: var(--ink-2); line-height: 1.6; }
+
+  /* trust */
+  .trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .trust .card { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 24px 24px; }
+  .trust .card h3 { font-size: 16px; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .trust .card p { font-size: 14px; color: var(--ink-2); line-height: 1.55; }
+  @media (max-width: 720px){ .trust { grid-template-columns: 1fr; } }
+
+  /* start here CTA */
+  .start { background: linear-gradient(180deg, var(--brand-soft), var(--bg)); border-top: 1px solid var(--line); }
+  .start-inner { display: grid; grid-template-columns: 1.3fr 1fr; gap: 44px; align-items: center; }
+  .start .label { color: var(--brand); display: block; margin-bottom: 14px; }
+  .start h2 { font-family: var(--serif); font-size: 31px; line-height: 1.18; letter-spacing: -0.01em; font-weight: 600; margin-bottom: 14px; }
+  .start p { font-size: 16px; color: var(--ink-2); line-height: 1.6; margin-bottom: 12px; }
+  .start .card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 28px; box-shadow: 0 10px 34px rgba(122,31,43,.10); }
+  .start .card .kick { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); font-weight: 700; margin-bottom: 10px; }
+  .start .card .name { font-family: var(--serif); font-size: 23px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .start .card .desc { font-size: 14.5px; color: var(--ink-2); line-height: 1.55; margin-bottom: 20px; }
+  @media (max-width: 720px){ .start-inner { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* final cta */
+  .final { text-align: center; padding: 84px 0; }
+  .final h2 { font-family: var(--serif); font-size: 35px; letter-spacing: -0.01em; font-weight: 600; margin-bottom: 14px; max-width: 26ch; margin-left: auto; margin-right: auto; }
+  .final p { font-size: 17px; color: var(--ink-2); max-width: 56ch; margin: 0 auto 28px; }
+
+  /* lead form */
+  .lead-form { display: flex; flex-direction: column; gap: 10px; }
+  .fld { font-family: var(--sans); font-size: 14.5px; padding: 11px 12px; border: 1px solid var(--line-2); border-radius: 8px; background: #fff; color: var(--ink); width: 100%; box-sizing: border-box; }
+  .fld:focus { outline: none; border-color: var(--brand); }
+  textarea.fld { resize: vertical; }
+  .hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+  .form-ok { font-size: 14.5px; color: var(--brand); font-weight: 600; }
+
+  footer { border-top: 1px solid var(--line); padding: 30px 0 48px; }
+  .foot-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .fine { font-size: 12.5px; color: var(--ink-4); max-width: 66ch; line-height: 1.55; }
+  .cr { font-size: 12.5px; color: var(--ink-3); letter-spacing: .03em; white-space: nowrap; }
+  .cr b { color: var(--brand); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <!-- >_ prompt mark, oxblood — matches portal litos-mark.svg (D-056) -->
+      <svg viewBox="0 0 40 48" role="img" aria-label="Discovery Loop by LitigationOS">
+        <path d="M7 13 L21 24 L7 35" fill="none" stroke="#7a1f2b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="22" y1="37.5" x2="34" y2="37.5" stroke="#7a1f2b" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <span class="wm">Discovery&nbsp;Loop</span>
+      <span class="by">by <a href="../litigationos/" style="text-decoration:none;"><b>LitigationOS</b></a></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#why">Why it's different</a>
+      <a href="#answers">Common questions</a>
+      <a class="btn" href="#start">Run a set free</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow label">The discovery bottleneck isn't the draft — it's the client</span>
+    <h1>Get your client's discovery answers <span class="gold">without the three-week chase.</span></h1>
+    <p class="lead">Discovery Loop turns a confusing, multi-week client-chasing process into complete answers your client can finish from their phone — in plain language, in their own language, across as many sittings as they need. Then it cross-checks every answer against your case file and hands you a clean, service-ready response. <strong>No scheduling. No chasing. No IT setup.</strong></p>
+    <div class="hero-cta">
+      <a class="btn btn-lg" href="#start">Run my pending set — free</a>
+      <a class="btn btn-lg btn-ghost" href="#how">See how it works</a>
+    </div>
+    <p class="hero-note">Built and proven in a working litigation practice, on real matters under real deadlines. Works with the case files you already have — nothing to migrate.</p>
+  </div>
+</section>
+
+<!-- ============ WHY NOW — the hook ============ -->
+<div class="wrap hook">
+  <div class="hook-inner">
+    <svg viewBox="0 0 40 48" role="presentation">
+      <path d="M7 13 L21 24 L7 35" fill="none" stroke="#7a1f2b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="22" y1="37.5" x2="34" y2="37.5" stroke="#7a1f2b" stroke-width="5" stroke-linecap="round"/>
+    </svg>
+    <p>Opposing counsel is already using AI to serve discovery almost the day a case is filed — <b>compressing the months you used to have down to weeks.</b> The drafting was never the slow part. Getting your client to actually answer 50 to 150 formulaic legal questions, correctly, before a hard deadline — that's the bottleneck. Discovery Loop is built for exactly that step.</p>
+  </div>
+</div>
+
+<!-- ============ PROOF OF LIFE ============ -->
+<!-- Stats are definitional/qualitative and launch-safe. Upgrade with pinned pilot metrics
+     (turnaround time, client completion rate) once measured — see GTM Doc 6. -->
+<div class="wrap">
+  <section class="proof">
+    <div class="proof-inner">
+      <div>
+        <span class="label">Built in a practice, not a lab</span>
+        <h2>This isn't a demo. A working litigation practice runs discovery on it every day.</h2>
+        <p>Discovery Loop was built inside a live practice and used on real discovery sets under real statutory deadlines — from the client's first plain-language answer to the response served on opposing counsel. Every draft is reviewed and signed by the attorney, the way the rules require.</p>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="n">Weeks&nbsp;&rarr;&nbsp;days</div><!-- qualitative; replace with pinned turnaround once measured -->
+          <div class="k">from request received to full client answers</div>
+        </div>
+        <div class="stat">
+          <div class="n">One&nbsp;link</div>
+          <div class="k">texted to your client — no login, no app, nothing to install</div>
+        </div>
+        <div class="stat">
+          <div class="n">100%</div>
+          <div class="k">of responses attorney-reviewed before service</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="blk" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">How it works</span>
+      <h2>Four steps, and the hardest one runs itself.</h2>
+      <p>Discovery Loop starts where other tools stop — not after you've collected the client's answers, but at the job of getting them in the first place.</p>
+    </div>
+    <div class="steps">
+      <article class="step">
+        <div class="num">1</div>
+        <h3>Send us the set</h3>
+        <p>Upload the incoming discovery request and whatever case-file content you have on hand — all of it, some of it, or none of it. No setup, no migration, no IT. Cross-check accuracy scales with whatever you provide.</p>
+      </article>
+      <article class="step">
+        <div class="num">2</div>
+        <h3>Your client answers from their phone</h3>
+        <p>We translate the formal requests into plain-language questions, consolidate the duplicates, and text your client a link they finish on their own time — in multiple sittings, in their own language, with document upload. Unanswered questions stay visible until they’re answered, so nothing silently stalls.</p>
+      </article>
+      <article class="step">
+        <div class="num">3</div>
+        <h3>We catch the contradictions</h3>
+        <p>As answers come in, Discovery Loop cross-checks them against your case file and flags contradictions and potentially case-damaging admissions — before they ever reach opposing counsel, not after.</p>
+      </article>
+      <article class="step">
+        <div class="num">4</div>
+        <h3>You get a service-ready draft</h3>
+        <p>Everything compiles into a rules-compliant response — objections, formatting, and your firm's letterhead included — with special handling for high-risk question types like requests for admission. Ready for your review and signature.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY IT'S DIFFERENT — the four pillars ============ -->
+<section class="blk" id="why" style="background:var(--surface-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Why Discovery Loop is different</span>
+      <h2>Matter management tracks your deadlines. Drafting tools format your objections. Neither one gets the answers out of your client.</h2>
+      <p>That gap is the whole point. Here's what Discovery Loop does that the tools on your desk today don't.</p>
+    </div>
+    <div class="pillars">
+      <article class="pillar">
+        <div class="k">Pillar 01</div>
+        <h3>The client-answer bottleneck, solved</h3>
+        <p>The slowest part of discovery has never been the drafting — it's getting a confused or reluctant client to answer. Discovery Loop lets clients complete their questions in plain language, consolidated to remove duplicates, in their own language, on their phone, across multiple sessions.</p>
+      </article>
+      <article class="pillar">
+        <div class="k">Pillar 02</div>
+        <h3>Contradictions caught before they cost you</h3>
+        <p>Client answers are automatically cross-checked against the case file, surfacing contradictions and damaging admissions before the response is served — not after opposing counsel finds them for you.</p>
+      </article>
+      <article class="pillar">
+        <div class="k">Pillar 03</div>
+        <h3>Built for attorneys who aren't AI power users</h3>
+        <p>Discovery Loop is built around the rules of civil procedure, with dedicated logic for high-risk question types — the kind of setup you'd otherwise have to be a serious power user to replicate by hand, teaching the rules and loading case context every time.</p>
+      </article>
+      <article class="pillar bill">
+        <div class="k">Pillar 04 · for hourly firms</div>
+        <h3>Speed without losing the bill</h3>
+        <p>Faster discovery shouldn't mean lost revenue. Discovery Loop captures the judgment-based review time the rules require you to log, and makes it easy to context-switch into other billable work while the model runs — turning idle minutes into productive, billable time.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOTH SIDES ============ -->
+<section class="blk bothsides">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:24px;">
+      <span class="label">Both sides of the exchange</span>
+      <h2>Discovery runs both ways. So does Discovery Loop.</h2>
+      <p>The client-answer bottleneck is where it earns its keep — but you're not left stitching a second tool onto the rest of the cycle.</p>
+    </div>
+    <div class="row">
+      <div class="item">
+        <h3>Propound &amp; track</h3>
+        <p>Draft your outbound discovery requests and see where every item stands across the case — instead of tracking your own requests in a spreadsheet or from memory.</p>
+      </div>
+      <div class="item">
+        <h3>Meet-and-confer, drafted</h3>
+        <p>When a dispute surfaces, Discovery Loop drafts the meet-and-confer correspondence tied to that specific discovery dispute — quickly, and under deadline pressure.</p>
+      </div>
+      <div class="item">
+        <h3>Deadlines in view</h3>
+        <p>Deadline visibility tied directly to each active discovery request, so nothing falls through the cracks as your caseload grows across multiple stages at once.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OBJECTION HANDLING ============ -->
+<section class="blk" id="answers">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Common questions</span>
+      <h2>What attorneys ask before they try it.</h2>
+    </div>
+    <div class="faq">
+      <div class="qa">
+        <div class="q">&ldquo;We already use Clio / MyCase / Filevine.&rdquo;</div>
+        <div class="a">Discovery Loop doesn't replace your matter-management platform, and doesn't ask you to move off it. It solves the one thing those platforms aren't built for: getting usable answers out of the client. Keep what tracks your cases — add the piece that fills them in.</div>
+      </div>
+      <div class="qa">
+        <div class="q">&ldquo;Is this going to hallucinate and get me sanctioned?&rdquo;</div>
+        <div class="a">It's built on the rules of civil procedure with specific logic for high-risk question types like requests for admission — not a general-purpose chatbot you have to teach the rules to. And every output is attorney-reviewed and logged before anything is served. Nothing leaves your desk without your signature.</div>
+      </div>
+      <div class="qa">
+        <div class="q">&ldquo;I'd have to dig up and upload all my case files.&rdquo;</div>
+        <div class="a">You don't have to. The cross-check works with as much or as little of the case file as you have on hand — accuracy scales with what you give it. Dropbox already works — point Discovery Loop at your case folder and it pulls the file from there. That covers Clio firms using Dropbox document storage too, since Clio keeps those matter folders in your Dropbox. Native Clio and Box integrations are on the roadmap; and you can always just upload what’s convenient.</div>
+      </div>
+      <div class="qa">
+        <div class="q">&ldquo;I don't want to deal with any kind of IT setup.&rdquo;</div>
+        <div class="a">There isn't any. Open a case, upload the request and whatever case file you have, and generate the client link. It works with the file storage, email, and calendar you already run on — no migration, no configuration, no IT department required.</div>
+      </div>
+      <div class="qa">
+        <div class="q">&ldquo;Is the contradiction memo discoverable?&rdquo;</div>
+        <div class="a">The memo goes to you and only you — never to your client, never filed, never served. It exists for your case analysis, in the same posture as an internal memo you'd draft yourself, and how you hold it within your privilege and work-product framework stays your call. Our job is making sure it never travels anywhere but your desk.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST & SETUP ============ -->
+<section class="blk" style="background:var(--surface-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="label">Held at your firm</span>
+      <h2>Your practice. Your data. Reviewed and signed by you.</h2>
+      <p>Discovery Loop is the first module of LitigationOS — built compliance-first, for a firm that doesn't have an IT department.</p>
+    </div>
+    <div class="trust">
+      <div class="card">
+        <h3>Your data stays yours</h3>
+        <p>Confidential and encrypted, processed on zero-retention enterprise models that never train on your work or your clients' answers.</p>
+      </div>
+      <div class="card">
+        <h3>Compliance is the design</h3>
+        <p>Every response is attorney-reviewed before it's served, and that review is captured for bar compliance. Trust isn't a promise on the page — it's a record you can produce.</p>
+      </div>
+      <div class="card">
+        <h3>Light setup, no IT</h3>
+        <p>Works with the file storage, email, and calendar you already use. No migration, no platform to move onto, no IT department to get started.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ START HERE ============ -->
+<section class="blk start" id="start">
+  <div class="wrap start-inner">
+    <div>
+      <span class="label">Start here</span>
+      <h2>See it work on one of your own cases — free.</h2>
+      <p>You don't have to change anything about how your firm works to find out if this is real. Start where the pain is sharpest: a discovery set that's pending right now.</p>
+      <p>Send us the set on your desk today. We compute the deadline, text your client a plain-language questionnaire link, and hand back clean responses plus an attorney-only contradiction memo. The first set is free, and everything you send is held in confidence — used only to run your set, never shared or trained on, and deleted on your request.</p>
+    </div>
+    <div class="card">
+      <div class="kick">Available now</div>
+      <div class="name">Run your pending set</div>
+      <div class="desc">Prove Discovery Loop on a real set of discovery before you commit to anything. Same profile as the practice it was built in: a solo or small litigation firm with a real deadline on the calendar.</div>
+      <form class="lead-form" id="contact-form">
+        <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input class="fld" type="text" name="name" placeholder="Your name" required>
+        <input class="fld" type="email" name="email" placeholder="Work email" required>
+        <input class="fld" type="text" name="firm" placeholder="Firm name" required>
+        <input class="fld" type="tel" name="phone" placeholder="Phone (optional)">
+        <input class="fld" type="text" name="matter" placeholder="Case + response deadline, if known">
+        <button class="btn btn-lg" type="submit" style="width:100%;">Run my pending set free</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final">
+  <div class="wrap">
+    <h2>The hardest part of discovery was never the drafting. It was getting your client to answer.</h2>
+    <p>No scheduling. No chasing. Your client answers from their phone, on their own time, in their own language — and you get a clean, service-ready response. Start with one set and see.</p>
+    <a class="btn btn-lg" href="#start">Run a set free</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <p class="fine">Discovery Loop, by LitigationOS (a Clearlaw product), is a tool for licensed attorneys. It assists with fact-gathering, analysis, and drafting; it does not give legal advice, and nothing it produces is served without attorney review and, where required, client verification under oath. Discovery Loop reduces time spent on discovery tasks; it does not guarantee outcomes.</p>
+    <p class="cr"><b>LitigationOS</b> · © 2026 Clearlaw</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var LEADS_ENDPOINT = "https://clearlaw-leads.jordan-204.workers.dev/api/lead";
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = {};
+    new FormData(form).forEach(function(v, k){ data[k] = v; });
+    data.source = 'discovery-loop';
+    var btn = form.querySelector('button[type=submit]');
+    if (!LEADS_ENDPOINT) { /* graceful fallback until the worker is live */
+      location.href = 'mailto:hello@clearlaw.ai?subject=' + encodeURIComponent('Discovery Loop — run my pending set free') +
+        '&body=' + encodeURIComponent('Name: ' + (data.name||'') + '\nEmail: ' + (data.email||'') + '\nFirm: ' + (data.firm||'') + '\nPhone: ' + (data.phone||'') + '\nMatter: ' + (data.matter||'') + '\n\n' + (data.message||''));
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Sending\u2026';
+    fetch(LEADS_ENDPOINT, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (!res.ok) throw new Error(res.error || 'Something went wrong');
+        form.innerHTML = '<p class="form-ok">Thanks \u2014 we got it. You\u2019ll hear from us at ' + (data.email || 'your email') + '.</p>';
+      })
+      .catch(function(err){
+        btn.disabled = false; btn.textContent = 'Run my pending set free';
+        alert((err && err.message) || 'Something went wrong \u2014 email hello@clearlaw.ai.');
+      });
+  });
+})();
+</script>
+</body>
+</html>
